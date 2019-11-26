@@ -5,6 +5,12 @@ import { AppContainer } from 'react-hot-loader';
 import Redbox from 'redbox-react';
 
 import Presentation from './presentation';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+const client = new ApolloClient({
+    uri: 'https://countries.trevorblades.com/',
+});
 
 const CustomErrorReporter = ({ error }) => <Redbox error={error} />;
 
@@ -14,7 +20,9 @@ CustomErrorReporter.propTypes = {
 
 ReactDOM.render(
   <AppContainer errorReporter={CustomErrorReporter}>
-    <Presentation />
+      <ApolloProvider client={client}>
+        <Presentation />
+      </ApolloProvider>
   </AppContainer>,
   document.getElementById('root')
 );
@@ -24,7 +32,9 @@ if (module.hot) {
     const NextPresentation = require('./presentation').default;
     ReactDOM.render(
       <AppContainer errorReporter={CustomErrorReporter}>
-        <NextPresentation />
+          <ApolloProvider client={client}>
+            <NextPresentation />
+          </ApolloProvider>
       </AppContainer>,
       document.getElementById('root')
     );

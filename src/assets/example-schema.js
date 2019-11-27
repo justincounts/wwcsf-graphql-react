@@ -1,4 +1,4 @@
-export default `
+export const FullExample =`
 type Continent {
   code: String
   name: String
@@ -35,3 +35,33 @@ type Query {
 
 scalar Upload
 `;
+
+export const OutputObject =`
+    type Country {
+      code: String
+      name: String
+      native: String
+      phone: String
+      continent: Continent
+      currency: String
+      languages: [Language]
+      emoji: String
+      emojiU: String
+    }        
+`;
+
+export const InputObject =` 
+    input CountryInput {
+      code: String
+      name: String
+      native: String
+      phone: String
+      continent: Continent
+      currency: String
+      languages: [Language]
+      emoji: String
+      emojiU: String
+    }    
+`;
+
+export default FullExample;

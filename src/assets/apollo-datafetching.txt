@@ -1,0 +1,25 @@
+import {gql} from "apollo-boost";
+import SIMPLE_QUERY_GQL from "./simple-query-gql";
+import {useQuery} from "@apollo/react-hooks";
+
+const query = gql`
+    query GetCountryDetails($country:String!){
+        country(code: $country) {
+            name
+            native
+            emoji
+            currency
+            languages {
+                code
+                name
+            }
+        }
+    }
+`;
+
+function Country({code}){
+    const {loading, error, data } = useQuery(query);
+    if (error) return <Error />;
+    if (loading || !data) return <Fetching />;
+    return <CountryDetail country={data.country}>
+}
